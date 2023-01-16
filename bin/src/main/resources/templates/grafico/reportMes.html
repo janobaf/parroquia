@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1" />
+
+ 	<title th:text="${titulo}" ></title>
+        <meta http-equiv="X-UA_Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="../css/menu.css" >
+        <link rel="stylesheet" href="../css/stylesGeneral.css">
+        
+        <link rel="stylesheet"  href="../css/calendario.css">
+        <script type="text/javascript" src="../js/calendario.js"></script>
+        <script type="text/javascript" src="../js/libro_buscar.js"></script>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	</head>
+
+<body>
+ 		<!-- MENU INICIO -->  
+        <div th:replace="menu/menu :: menuFragment">
+ 		</div>
+        <!-- MENU FIN -->
+        
+	 	<div id="main-container" sec:authorize="hasRole('ROLE_USER')">	 	
+	 		<h1 class="texto-titulo" th:text ="${titulo}"></h1>
+	 		<div id="fechaactual"><i onclick="actualizar()">HOY: </i></div>
+	 		<div>
+                <div>
+	                <div id="container" style="width: 90%; height: 90%; margin: 0 auto overflow-x: auto;">
+					</div>	 	
+                </div>
+            </div>	 			
+	 	</div>
+		<script th:inline="javascript">
+	    $(function(){
+	    Highcharts.chart('container', {
+	        chart: {
+	            type: 'column'
+	        },
+	        title: {
+	            text: 'Reporte Mensual Registro Libros de los Sacramentos'
+	        },
+	        xAxis: {
+	            categories: [[${surveyMap.keySet()}]],
+	            crosshair: true
+	        },
+	        yAxis: {
+	            min: 0,
+	            max:100,	            
+	            title: {
+	                text: 'Procentaje (%)'
+	            }
+	        },
+	        tooltip: {
+	            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	            '<td style="padding:0"><b>{point.y:.1f} K</b></td></tr>',
+	            footerFormat: '</table>',
+	            shared: true,
+	            useHTML: true
+	        },
+	        plotOptions: {
+	            column: {
+	                pointPadding: 0.2,
+	                borderWidth: 0
+	            }
+	        },
+	        series: [{
+	            name: 'Sacramento',
+	            data: [[${surveyMap.values()}]]
+	        }]
+	    });
+	    });
+		</script>
+		
+        <script>
+            const btn = document.querySelector('#menu-btn');
+            const menu = document.querySelector('#sidemenu');
+            btn.addEventListener('click', e =>{
+                menu.classList.toggle('menu-expanded')
+                menu.classList.toggle('menu-collapsed')
+                document.querySelector('body').classList.toggle('body-expanded');
+            });
+        </script>        
+ 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            //jquery for toggle sub menus
+            $('.sub-btn').click(function(){
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+            });
+        });
+        </script>
+
+</body>
+</html>

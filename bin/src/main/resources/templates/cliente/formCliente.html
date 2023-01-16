@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title th:text="${titulo}" ></title>
+        <meta http-equiv="X-UA_Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="../css/menu.css" >
+        <link rel="stylesheet" href="../css/stylesGeneral.css">
+        
+        <link rel="stylesheet"  href="../css/calendario.css">
+        <script type="text/javascript" src="../js/calendario.js"></script>
+    </head>    
+    
+    <body>    
+        <!-- MENU INICIO -->
+        <div th:replace="menu/menu :: menuFragment">
+ 		</div>
+ 		<!-- MENU FIN -->
+
+        <div id="main-container">        
+	       <div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
+			<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+			<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
+			<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>		            
+            
+            <h1  class="texto-titulo" th:text ="${titulo}"></h1>
+             <div  id="fechaactual"><i onclick="actualizar()">HOY: </i></div>
+            
+            <div th:object="${cliente}" th:remove="tag">
+	            <ul th:if="${#fields.hasErrors('*')}" class="alert alert-danger" role="alert">
+					<li th:each="err: ${#fields.errors('*')}" th:text="${err}"></li>
+				</ul>                
+            </div>
+            
+           <main>
+           <form th:action="@{/formCliente}" th:object="${cliente}" method="post">
+		  		<div>
+					<label >DNI</label>
+					<div>		
+						<input type="text" class="casilla"  th:field="*{dni}" autofocus />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>
+				<div >
+					<label >Apellido Paterno</label>
+					<div>		
+						<input type="text" class="casilla"  th:field="*{apePaterno}"  />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>
+				<div >
+					<label >Apellido Materno</label>
+					<div>		
+						<input type="text" class="casilla"  th:field="*{apeMaterno}"  />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>
+				<div >
+					<label>Nombre</label>
+					<div>		
+						<input type="text" class="casilla" th:field="*{nombre}"  />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>				
+				<div >
+					<label>Fecha Nacimiento</label>
+					<div class="col-sm-10">		
+						<input type="text" class="casilla"  th:field="*{fechasNacimiento}" placeholder="dd/mm/aaaa" />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>
+				<div >
+					<label>Sexo</label>
+					<div class="col-sm-10">	
+					<select th:field="*{sexo}" >
+					    <option th:value="'M'" th:text="Masculino"></option>
+					    <option th:value="'F'" th:text="Femenino"></option>
+					</select>
+					</div>
+				</div>
+				<div >
+					<label>Celular 1</label>
+					<div class="col-sm-10">		
+						<input type="text" class="casilla"  th:field="*{celular1}"  />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>
+				<div >
+					<label>Celular 2</label>
+					<div class="col-sm-10">		
+						<input type="text" class="casilla"  th:field="*{celular2}"  />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>				
+				<div >
+					<label>Direccion</label>
+					<div class="col-sm-10">		
+						<input type="text" class="casilla"  th:field="*{direccion}"  />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>
+				<div >
+					<label>Correo</label>
+					<div class="col-sm-10">		
+						<input type="text" class="casilla"  th:field="*{correo}"  />
+						<small class="form-text text-danger" ></small>
+					</div>
+				</div>
+				<div class="form-group row">
+				<div >		
+					<input type="submit" value="Guardar" class="btn-guardar" />
+					<input type="hidden" th:field="*{id}"  />
+				</div>
+				</div>
+		
+	 		</form> 
+            </main>
+            
+        </div>
+
+          <script>
+            const btn = document.querySelector('#menu-btn');
+            const menu = document.querySelector('#sidemenu');
+            btn.addEventListener('click', e =>{
+                menu.classList.toggle('menu-expanded')
+                menu.classList.toggle('menu-collapsed')
+                document.querySelector('body').classList.toggle('body-expanded');
+
+            });
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            //jquery for toggle sub menus
+            $('.sub-btn').click(function(){
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+            });
+        });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+ <div th:fragment="menuFragment">
+ 	<!-- MENU INICIO -->  
+        <div id="sidemenu" class="menu-collapsed" >
+            <div id="header">
+                <div id="title">
+                    <span class="photo"><img src="img/logo_icono.png" alt=""></span>
+                </div>
+    
+                <div id="menu-btn">
+                    <div class="btn_hamburger"></div>
+                    <div class="btn_hamburger"></div>
+                    <div class="btn_hamburger"></div>
+                </div>
+            </div>
+            
+            
+            <div id="profile" sec:authorize="isAuthenticated()" >
+                <div id="photo"><img src="../img/icono_parroco.png" alt=""></div>
+                <div id="name">
+                    <span sec:authentication="name"></span>                    
+                </div>                       
+            </div>
+            
+        
+            <div id="menu-items"> 
+                <div class="item" sec:authorize="hasRole('ROLE_USER')">
+                    <a href="panelControl" th:href="@{/panelControl}">
+                        <div class="icon"><img src="../img/menu-panel.png" alt=""></div>
+                        <div class="title"><span>PANEL DE CONTROL</span></div>
+                    </a>
+                </div>
+                            
+
+                <div class="item" sec:authorize="hasRole('ROLE_USER')">
+                    <a  th:href="@{/listarCliente}">
+                        <div class="icon"><img src="../img/menu-cliente.png" alt=""></div>
+                        <div class="title"><span>Fieles</span></div>
+                    </a>
+                </div>
+                <div class="item" sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a href="#empleado" th:href="@{/listarEmpleado}">
+                        <div class="icon"><img src="../img/menu-empleado.png" alt=""></div>
+                        <div class="title"><span>Empleados</span></div>
+                    </a>
+                </div>
+                <div class="item" sec:authorize="hasRole('ROLE_USER')">
+                    <a href="#libros" th:href="@{/listarLibro}">
+                        <div class="icon"><img src="../img/menu-libro.png" alt=""></div>
+                        <div class="title"><span>Libros</span></div>
+                    </a>
+                </div>
+                <div class="item" sec:authorize="hasRole('ROLE_USER')">
+                    <a href="#" class="sub-btn">
+                        <div class="icon"><img src="../img/menu-archivo.png" alt=""></div>
+                        <div class="title"><span>Archivo Parroquial<i class="fas fa-angle-right dropdown"></i></span></div>
+                    </a>
+                    <div class="sub-menu">
+                    	<div class="sub-menu-sub">
+                            <div class="icon"><img src="../img/menu-bautismo.png" alt=""></div>
+                            <div class="title"><a href="#libroBautizo" th:href="@{/listarLibroBautizo}" class="sub-item">Bautizo</a></div>
+                        </div>
+                        <div class="sub-menu-sub">
+                            <div class="icon"><img src="../img/menu-confirma.png" alt=""></div>
+                            <div class="title"><a href="#libroConfirmacion" th:href="@{/listarLibroConfirmacion}" class="sub-item">Confirmacion</a></div>
+                        </div>
+                        <div class="sub-menu-sub">
+                            <div class="icon"><img src="../img/menu-matrimonio.png" alt=""></div>
+                            <div class="title"><a href="#libroMatrimonio" th:href="@{/listarLibroMatrimonio}" class="sub-item">Matrimonio</a></div>
+                        </div>                        
+                        <div class="sub-menu-sub">
+                            <div class="icon"><img src="../img/menu-actas.png" alt=""></div>
+                            <div class="title"><a href="#acta" th:href="@{/listarActa}" class="sub-item">Actas</a></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="item" sec:authorize="hasRole('ROLE_USER')">                    
+                    <a href="#" class="sub-btn">
+                        <div class="icon"><img src="../img/menu-reporte.png" alt=""></div>
+                        <div class="title"><span>Reportes<i class="fas fa-angle-right dropdown"></i></span></div>
+                    </a>
+                    <div class="sub-menu">
+                    	<div class="sub-menu-sub">
+                            <div class="icon"><img src="../img/menu-report-mes.png" alt=""></div>
+                            <div class="title"><a href="#usuario" th:href="@{/reportMes}" class="sub-item">Mensual</a></div>
+                        </div>
+                        <div class="sub-menu-sub">
+                            <div class="icon"><img src="../img/menu-report-general.png" alt=""></div>
+                            <div class="title"><a href="#role" th:href="@{/reportAno}" class="sub-item">General</a></div>
+                        </div>
+                        
+                      </div>                    
+                </div>
+                <div class="item" sec:authorize="hasRole('ROLE_USER')">
+                    <a href="#agendas" th:href="@{/listarAgenda}">
+                        <div class="icon"><img src="../img/menu-agenda.png" alt=""></div>
+                        <div class="title"><span>Agenda</span></div>
+                    </a>
+                </div>
+                <div class="item" sec:authorize="hasRole('ROLE_ADMIN')">                    
+                    <a href="#" class="sub-btn">
+                        <div class="icon"><img src="../img/menu-usuario.png" alt=""></div>
+                        <div class="title"><span>Usuarios y Roles<i class="fas fa-angle-right dropdown"></i></span></div>
+                    </a>
+                    <div class="sub-menu">
+                    	<div class="sub-menu-sub">
+                            <div class="icon"><img src="../img/customer.png" alt=""></div>
+                            <div class="title"><a href="#usuario" th:href="@{/listarUsuario}" class="sub-item">Usuarios</a></div>
+                        </div>
+                        <div class="sub-menu-sub">
+                            <div class="icon"><img src="../img/settings.png" alt=""></div>
+                            <div class="title"><a href="#role" th:href="@{/listarRole}" class="sub-item">Roles</a></div>
+                        </div>
+                        
+                      </div>                    
+                </div>
+                <div class="item separator"> 
+                </div>                 
+                
+                <div class="item" >
+                	<form id="logoutForm" th:action="@{/logout}" method="post">
+                    <a onclick="document.getElementById('logoutForm').submit()" style="cursor: default">
+                        <div class="icon"><img src="../img/close.png" alt=""></div>
+                        <div class="title"><span>Cerrar</span></div>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" >         
+                    </a>
+                    </form>                
+                </div>
+                
+                               
+            </div>
+        </div>        
+        <!-- MENU FIN -->
+ </div>
+  <script>
+            const btn = document.querySelector('#menu-btn');
+            const menu = document.querySelector('#sidemenu');
+            btn.addEventListener('click', e =>{
+                menu.classList.toggle('menu-expanded')
+                menu.classList.toggle('menu-collapsed')
+                document.querySelector('body').classList.toggle('body-expanded');
+            });
+        </script>
+
+        
+</html>

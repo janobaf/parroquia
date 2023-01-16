@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Soft</title>    
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA_Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <link href="../css/login.css" rel="stylesheet">
+    </head>
+    <body>    
+        <div class="loginBox">
+            <h2 class="textLogin">LOGIN</h2>
+            <img class="img-fondo"/>
+            <div class="xD">
+                <form th:action="@{/login}" method="post">
+                    <p class="texto-delante">Usuario</p>
+                    <input  type="text" name="username" placeholder="" class="casilla" autofocus required>
+                    <p>Contraseña</p>
+                    <input type="password" name="password" placeholder="" class="casilla" required value="1234">
+                    </br></br>
+                    <input type="submit" name="" value="Iniciar Sesión" class="btn btn-amarillo" >                   
+                </form>
+            </div>
+            
+        </div>
+    </body>
+</html>

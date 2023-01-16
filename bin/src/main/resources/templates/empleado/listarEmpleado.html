@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title th:text="${titulo}" ></title>
+        <meta http-equiv="X-UA_Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="../css/menu.css" >
+        <link rel="stylesheet" href="../css/stylesGeneral.css">
+        
+        <link rel="stylesheet"  href="../css/calendario.css">
+        <script type="text/javascript" src="../js/calendario.js"></script>
+        <script type="text/javascript" src="../js/empleado.js"></script>
+    </head>    
+    
+    <body> 
+ 		<!-- MENU INICIO -->  
+        <div th:replace="menu/menu :: menuFragment">
+ 		</div>
+        <!-- MENU FIN -->
+
+        <div id="main-container">
+        
+	        <div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
+			<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+			<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
+			<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+		
+            <!-- 
+            
+            <a th:href="@{/formEmpleado}" class="btn btn-default btn-xs">Crear Empleado</a>
+            <br>
+             -->
+            <h1  class="texto-titulo" th:text ="${titulo}"> </h1>
+            <div  id="fechaactual"><i onclick="actualizar()">HOY: </i></div>
+            
+            <main>
+               
+           	<div>
+            	<input type="text" name="dni" placeholder="DNI" class="casilla" id="filtro">
+            	<input type="text" name="apePater" placeholder="APELLIDO PATERNO" class="casilla" >
+            	<input type="text" name="apeMater" placeholder="APELLIDO MATERNO" class="casilla" >
+            	<a style="text-decoration: none" class="btn-buscar" id="btnBuscar" onclick="buscar();"><img src="../img/buscar.png"  alt="" class="estiloImagenBoton">Buscar</a>
+		        <a th:href="@{/formEmpleado}" style="text-decoration: none" class="btn-nuevo"><img src="../img/nuevo.png"  alt="" class="estiloImagenBoton">Nuevo</a>					
+			</div>
+		    </main> 
+			
+			
+            <div>                
+               <!-- <a sec:authorize="hasRole('ROLE_ADMIN')"  href="#miModal" class="texto-deco">Crear Empleado</a>
+                --> 
+                <div id="miModal" class="modal">
+                <div class="modal-contenido">
+                    <a href="#" class="texto-deco">X</a>                    
+                    <h2>Empleado</h2>
+					<form class="form-conten">
+                        <label for="firstName" class="first-name">DNI</label>
+	                    <input  type="text" name="nombre" id="nombre" placeholder="Escribe tu nombre">
+	                    <br>
+                        <label for="firstName" class="first-name">Ape Paterno</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+                        <br>
+                        <label for="firstName" class="first-name">Ape Materno</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+	                    <br>
+                        <label for="firstName" class="first-name">Nombres</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+	                    <br>
+                        <label for="firstName" class="first-name">Cargo</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+                        <br>
+                        <label for="firstName" class="first-name">Fecha Nacimiento</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+	                    <br>
+                        <label for="firstName" class="first-name">Celular</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+                        <br>
+	                    <label for="firstName" class="first-name">Direccion</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+                        <br>
+	                    <label for="firstName" class="first-name">Correo</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+                        <br>
+	                    <label for="firstName" class="first-name">Fecha Inicio</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+                        <br>
+	                    <label for="firstName" class="first-name">Fecha Baja</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >
+                        <br>
+                        <label for="firstName" class="first-name">Estado</label>
+	                    <input type="text" name="" placeholder="" class="casilla" >	                    
+               		</form>
+                </div>  
+                </div>
+            </div>
+            
+            <br>
+            
+            <div>
+                <div class="table-container">
+                    <table class="table-rwd">
+                      <tr>
+                      	<th sec:authorize="hasRole('ROLE_USER')">ID</th>
+                        <th>DNI</th>
+						<th>A Paterno</th>
+						<th>A Materno</th>
+						<th>Nombres</th>
+						<th>Cargo</th>
+						<th>Fecha Nacimiento</th>
+						<th>Celular</th>
+						<th>Direccion</th>
+						<th>Correo</th>					
+						<th>Fecha Inicio</th>
+						<th>Fecha Baja</th>
+						<th>Estado</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+						<th>Archivo</th>
+                      </tr>
+                      <tr th:each="empleado: ${empleados}">
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.id}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.dni}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.apePaterno}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.apeMaterno}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.nombres}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.cargoId.nombre}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.fechasNacimiento}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.celular}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.direccion}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.correo}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.fechaInicio}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.fechaBaja}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${empleado.estado} ? 'Activo' : 'Baja'"></td>
+						<td sec:authorize="hasRole('ROLE_USER')">
+							<a th:href="@{/formEmpleado/}+${empleado.id}"><img src="../img/editar.png"  alt="" class="estiloImagenPequeno"></a>
+						</td>											
+						<td sec:authorize="hasRole('ROLE_ADMIN')">
+							<a th:href="@{/eliminarEmpleado/}+${empleado.id}" onclick="return confirm('Deseas Eliminar?');"><img src="../img/eliminar.png"  alt="" class="estiloImagenPequeno"></a>
+						</td>
+						<td>
+							<a onclick="verPdf(event)" ><img src="../img/descarga.png"  alt="" class="estiloImagenPequeno"></a>						
+						</td>
+					   </tr>                   
+                    </table>
+                  </div>
+            </div>
+            
+        </div>
+
+        <script>
+            
+        </script>
+
+          <script>
+            const btn = document.querySelector('#menu-btn');
+            const menu = document.querySelector('#sidemenu');
+            btn.addEventListener('click', e =>{
+                menu.classList.toggle('menu-expanded')
+                menu.classList.toggle('menu-collapsed')
+                document.querySelector('body').classList.toggle('body-expanded');
+
+            });
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            //jquery for toggle sub menus
+            $('.sub-btn').click(function(){
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+            });
+        });
+        </script>
+        
+    </body>
+</html>

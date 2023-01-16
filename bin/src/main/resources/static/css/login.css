@@ -1,0 +1,111 @@
+body{
+    margin: 0;
+    padding: 0;   
+    background: url(fondo.jpg);
+    background-size: cover;
+    font-family: sans-serif;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    
+}
+
+body::before{
+    content:'';
+	position: absolute;
+    top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+.loginBox{
+    position: fixed;    
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    height: 380px;
+    border-radius: 5%;
+    box-sizing: border-box;
+    border-color: seashell;
+    border-style: none,;
+    background: rgba(253, 247, 247, 0.5);
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 30px;
+    padding-top: 6%;
+    padding-left: 3%;    
+}
+
+.textLogin{
+    position: absolute;
+    width: 350px;
+    height: 20px;
+    left: 0px;
+    top: 0px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    background: #E0980C;
+    margin: 0;
+    padding: 20px 0 25px;
+    color: #523838;
+    text-align: center;   
+}
+
+
+.img-fondo{    
+    position: relative;
+    width: 58%;
+    left: 15%;    
+    height: 84%;
+    top: 2%;
+    background: url(logo_login.png);
+    background-size: contain;
+    margin: 0 0 0;
+    border-radius: 100%;
+    border-style: none;
+    
+}
+
+.xD{
+    position: absolute;
+    left: 30px;
+    top: 70px;
+    
+}
+
+.casilla {    
+    border: solid 1px #5c5c5c7c;
+    border-radius: 8px;
+    padding: 10px;
+    width: 270px;
+    height: 9px;
+    left: 37px;
+    top: 121px;
+    z-index:0;    
+}
+
+input{
+    width: 70%;
+    padding: 0px;
+}
+
+.btn {    
+    border-radius: 8px;
+    display: inline-block;
+    padding: 20px 15px;
+    text-decoration: none;
+    text-shadow: 0 1px rgba(255,255,255,.3);
+    box-shadow: 0 1px 1px rgba(0,0,0,.3);   
+    font-size: 20px;    
+}
+
+
+.btn-amarillo {
+    margin: 15%;
+    padding: 2% 8% 2%;
+    background-color: #E0980C;
+}
+
+
