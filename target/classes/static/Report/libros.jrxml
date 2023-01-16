@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.17.0-6d93193241dd8cc42629e188b94f9e0bc5722efd  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="98e0dfe5-3e06-4ed3-90f5-4931d5ac26d8">
+	<parameter name="parametro1" class="java.lang.String"/>
+	<field name="id" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="id"/>
+	</field>
+	<field name="estado" class="java.lang.Boolean">
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="estado"/>
+	</field>
+	<field name="fecha_pertura" class="java.util.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_pertura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fecha_pertura"/>
+	</field>
+	<field name="fecha_cierre" class="java.util.Date">
+		<property name="com.jaspersoft.studio.field.label" value="fecha_cierre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="fecha_cierre"/>
+	</field>
+	<field name="num_pags" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="num_pags"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="num_pags"/>
+	</field>
+	<field name="num_tomo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="num_tomo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="num_tomo"/>
+	</field>
+	<field name="tipo_sacramento" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="tipo_sacramento"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="tipo_sacramento"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="49" height="49" uuid="83833198-4134-417b-b328-c4e83419f4df"/>
+				<imageExpression><![CDATA["C:/GITHUB/WEB_Parroquia/spring-boot-parroquia/target/classes/static/img/logo.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="32" y="9" width="139" height="19" uuid="3aaaee9f-20c2-46be-9f58-14cdfbc33bf0"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[Parroquia San Pedro Nolasco]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="27" splitType="Stretch">
+			<staticText>
+				<reportElement x="228" y="0" width="99" height="19" uuid="385673f6-b63f-4a8f-bf83-8645c3799885"/>
+				<text><![CDATA[LISTA DE LIBROS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="48" height="30" uuid="787519dc-1ae4-4884-a29e-d58df821923b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="796cb577-8ef4-4007-a2f3-70dec600323a"/>
+				</reportElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="350" y="0" width="100" height="30" uuid="99d2893f-393f-4f46-9956-7aa2c9990aff">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="750c415f-fda6-4e22-b1a3-29bf36921d0f"/>
+				</reportElement>
+				<text><![CDATA[APERTURA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="0" width="100" height="30" uuid="ab65cd18-ea92-48e7-a233-ed95d8f2ce2a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ebc4560-1ad4-441e-9561-f9d32ae5642b"/>
+				</reportElement>
+				<text><![CDATA[CIERRE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="260" y="0" width="70" height="30" uuid="741df805-c778-4742-8d15-b951af0bc7f2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f832520b-a74d-415c-a895-e263c85bae43"/>
+				</reportElement>
+				<text><![CDATA[N. PAGINAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="0" width="59" height="30" uuid="180c03fc-aea9-4233-a632-0c8f05c7bc61">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f019e415-9072-48c4-900b-ec7af3bb255d"/>
+				</reportElement>
+				<text><![CDATA[N. TOMO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="49" y="0" width="139" height="30" uuid="5b1429a2-18f7-4d60-ab52-f729198eb32d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="961ab501-f902-4583-b055-4a28ab6b70a9"/>
+				</reportElement>
+				<text><![CDATA[SACRAMENTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="48" height="30" uuid="ab3967cb-425b-4f82-aed7-c4d1c441ed21">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8374fd7-e618-47f2-979a-a304b4ad30aa"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="350" y="0" width="100" height="30" uuid="ed0970eb-89ab-4bc9-89c1-8d99c291b463">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="750c415f-fda6-4e22-b1a3-29bf36921d0f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{fecha_apertura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="100" height="30" uuid="bde5b24b-7c4d-4b53-adfc-3a665e2dc735">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7ebc4560-1ad4-441e-9561-f9d32ae5642b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{fecha_cierre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="260" y="0" width="70" height="30" uuid="6e7ba1e1-1c2a-4250-b813-17ac20c40a76">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f832520b-a74d-415c-a895-e263c85bae43"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{num_pags}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="189" y="0" width="59" height="30" uuid="c0043498-7c36-4501-a14d-3dd5dee144e4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f019e415-9072-48c4-900b-ec7af3bb255d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{num_tomo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="49" y="0" width="139" height="30" uuid="ca24c8c9-499a-429b-977b-920107f29411">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="961ab501-f902-4583-b055-4a28ab6b70a9"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{tipo_sacramento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

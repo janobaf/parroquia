@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title th:text="${titulo}" ></title>
+        <meta http-equiv="X-UA_Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="../css/menu.css" >
+        <link rel="stylesheet" href="../css/stylesGeneral.css">
+        
+        <link rel="stylesheet"  href="../css/calendario.css">
+        <script type="text/javascript" src="../js/calendario.js"></script>
+        <script type="text/javascript" src="../js/libro_buscar.js"></script>
+    </head>    
+    
+    <body>    
+       <!-- MENU INICIO -->  
+        <div th:replace="menu/menu :: menuFragment">
+ 		</div>
+        <!-- MENU FIN -->
+
+        <div id="main-container">        
+	        <div class="alert alert-success" th:if="${success!=null}" th:text="${success}"></div>
+			<div class="alert alert-danger" th:if="${error!=null}" th:text="${error}"></div>
+			<div class="alert alert-warning" th:if="${warning!=null}" th:text="${warning}"></div>
+			<div class="alert alert-info" th:if="${info!=null}" th:text="${info}"></div>
+			<h1 class="texto-titulo" th:text ="${titulo}"></h1>
+            <div  id="fechaactual"><i onclick="actualizar()">HOY: </i></div>
+            
+            <main>
+            <form th:action="@{/listarLibro}" th:object="${libro}" method="get" >  
+           	<div>
+           		<select id="filtrarNombre" name="tipoSacramento" >
+						    <option th:value="1" th:text="Bautizo" ></option>
+						    <option th:value="2" th:text="Confirmacion"></option>
+						    <option th:value="3" th:text="Matrimonio"></option>
+				</select>
+           		<a class="btn-buscar" id="btnBuscar1" onclick="buscarNombre();"><img src="../img/buscar.png"  alt="" class="estiloImagenBoton"  >Buscar</a>       	
+            	<input type="text" name="numTomo" placeholder="NUMERO TOMO" class="casilla" id="filtro">       	
+            	<a class="btn-buscar" id="btnBuscar" onclick="buscar();"><img src="../img/buscar.png"  alt="" class="estiloImagenBoton" >Todo</a>            	
+		        <a th:href="@{/formLibro}" style="text-decoration: none" class="btn-nuevo"><img src="../img/nuevo.png"  alt="" class="estiloImagenBoton">Nuevo</a>
+		        <a style="text-decoration: none" class="btn-descarga" onclick="verPdf(event)"><img src="../img/descarga.png"  alt="" class="estiloImagenBoton">Descarga</a>								
+			</div>
+			</form> 
+			</main>
+            <div>
+                <div class="table-container">
+	                 		
+                    <table class="table-rwd">
+                      <tr>
+                      	<th sec:authorize="hasRole('ROLE_USER')">ID</th>
+                        <th>Nombre</th>                        
+                        <th>N Tomo</th>
+                        <th>Fecha Apertura</th>
+                        <th>Fecha Cierre</th>
+                        <th>Num Pags</th>
+						<th>Estado</th>
+						<th sec:authorize="hasRole('ROLE_USER')">Editar</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>	
+                      </tr>
+                      <tr th:each="libro: ${libros}">
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${libro.id}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${libro.tipoSacramento.nombre}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${libro.numTomo}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${libro.fechaApertura}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${libro.fechaCierre}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${libro.numPaginas}"></td>
+						<td sec:authorize="hasRole('ROLE_USER')" th:text="${libro.estado} ? 'Activo' : 'Cerrado'"></td>
+						<td sec:authorize="hasRole('ROLE_USER')">
+							<a th:href="@{/formLibro/}+${libro.id}"><img src="../img/editar.png"  alt="" class="estiloImagenPequeno"></a>
+						</td>											
+						<td sec:authorize="hasRole('ROLE_ADMIN')">
+							<a th:href="@{/eliminarLibro/}+${libro.id}" onclick="return confirm('Deseas Eliminar?');"><img src="../img/eliminar.png"  alt="" class="estiloImagenPequeno"></a>
+						</td>
+					</tr>                   
+                    </table>
+                  </div>
+            </div>            
+        </div>
+
+        <script>
+            const btn = document.querySelector('#menu-btn');
+            const menu = document.querySelector('#sidemenu');
+            btn.addEventListener('click', e =>{
+                menu.classList.toggle('menu-expanded')
+                menu.classList.toggle('menu-collapsed')
+                document.querySelector('body').classList.toggle('body-expanded');
+            });
+        </script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            //jquery for toggle sub menus
+            $('.sub-btn').click(function(){
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+            });
+        });
+        </script>
+    </body>
+</html>

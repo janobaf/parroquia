@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="ISO-8859-1" />
+
+ 	<title th:text="${titulo}" ></title>
+        <meta http-equiv="X-UA_Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="../css/menu.css" >
+        <link rel="stylesheet" href="../css/stylesGeneral.css">
+        
+        <link rel="stylesheet"  href="../css/calendario.css">
+        <script type="text/javascript" src="../js/calendario.js"></script>
+        <script type="text/javascript" src="../js/libro_buscar.js"></script>
+        
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+		<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+		<script src="https://code.highcharts.com/modules/exporting.js"></script>
+        
+</head>
+
+<body>
+ 		<!-- MENU INICIO -->  
+        <div th:replace="menu/menu :: menuFragment">
+ 		</div>
+        <!-- MENU FIN -->
+        
+	 	<div id="main-container" sec:authorize="hasRole('ROLE_USER')">	 	
+	 		<h1 class="texto-titulo" th:text ="${titulo}"></h1>
+	 		<div id="fechaactual"><i onclick="actualizar()">HOY: </i></div>	 	
+	 		<div>
+                <div>
+	                <div id="container" style="width: 90%; height: 90%; margin: 0 auto overflow-x: auto;">
+	                </div>
+				</div>                
+            </div>			
+	 	</div>				
+		
+		<script th:inline="javascript">
+			Highcharts.chart('container', {
+				chart : {
+					type : 'pie',
+					options3d : {
+						enabled : true,
+						alpha : 50,
+						beta : 0
+					}
+				},
+				title : {
+					text : 'Reporte Anula Libros de los Sacramentos'
+				},
+				tooltip : {
+					pointFormat : '{series.name}: <b>{point.percentage:.1f}%</b>'
+				},
+				plotOptions : {
+					pie : {
+						allowPointSelect : true,
+						cursor : 'pointer',
+						depth : 35,
+						dataLabels : {
+							enabled : true,
+							format : '{point.name}'
+						}
+					}
+				},
+				series : [ {
+					type : 'pie',
+					name : 'Ratio',
+					data : [ [ 'Bautizo', [[${bautizo}]] ], [ 'Confirmacion', [[${confirmacion}]] ]  ]
+				}	 ]
+			});
+		</script>
+		
+			
+        <script>
+            const btn = document.querySelector('#menu-btn');
+            const menu = document.querySelector('#sidemenu');
+            btn.addEventListener('click', e =>{
+                menu.classList.toggle('menu-expanded')
+                menu.classList.toggle('menu-collapsed')
+                document.querySelector('body').classList.toggle('body-expanded');
+            });
+        </script>        
+ 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            //jquery for toggle sub menus
+            $('.sub-btn').click(function(){
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+            });
+        });
+        </script>
+
+</body>
+</html>
