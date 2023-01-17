@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title th:text="${titulo}" ></title>
+        <meta http-equiv="X-UA_Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        <link href="../css/menu.css" rel="stylesheet">
+        <link href="../css/stylesGeneral.css" rel="stylesheet">
+        <link href="../css/progress.css" rel="stylesheet">
+        
+        <link rel="stylesheet"  href="../css/calendario.css">
+        <script type="text/javascript" src="../js/calendario.js"></script>
+    </head>    
+    
+    <body>    
+       <!-- MENU INICIO -->  
+        <div th:replace="menu/menu :: menuFragment">
+ 		</div>        
+        <!-- MENU FIN -->
+
+        <div id="main-container">                    
+            
+            <h1  class="texto-titulo" th:text ="${titulo}"></h1>            
+            <div  id="fechaactual"><i onclick="actualizar()">HOY: </i>  
+            </div>           
+             
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            
+            <div class="accordion" id="accordionExample">
+            	<form th:action="@{/formlibrosMatrimonio}" th:object="${librosMatrimonio}" method="post">
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Informacion de Conyugues
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <form >
+                            <label for="Padre">Esposo</label>
+                            <input type="text" name="esposo" id="" placeholder="" class="textPeque">                            
+                            <a href=""><img src="../img/mas.png" alt="" class="estiloImagenPequenoMas"></a>
+                            </br></br>
+                            <label for="Madre">Esposo-Bautizo</label>
+                            <input type="text" name="bautizoEsposo" id="" placeholder="" class="textPeque">         
+                            </br></br> 
+                            <label for="Madre">Esposo-Confirmacion</label>
+                            <input type="text" name="bautizoEsposo" id="" placeholder="" class="textPeque"> 
+                            </br></br>
+                            <label for="Madre">Esposa</label>
+                            <input type="text" name="esposa" id="" placeholder="" class="textPeque">                            
+                            <a href=""><img src="../img/mas.png" alt="" class="estiloImagenPequenoMas"></a>
+                            </br></br> 
+                            <label for="Madre">Esposa-Bautizo</label>
+                            <input type="text" name="bautizoEsposa" id="" placeholder="" class="textPeque">         
+                            </br></br> 
+                            <label for="Madre">Esposa-Confirmacion</label>
+                            <input type="text" name="bautizoEsposa" id="" placeholder="" class="textPeque"> 
+                            </br></br>
+                            <label for="Padrino">Padrino</label>
+                            <input type="text" name="padrino" id="" placeholder="" class="textPeque">
+                            <a href=""><img src="../img/mas.png" alt="" class="estiloImagenPequenoMas"></a>
+                            </br></br>
+                            <label for="Madrina">Madrina</label>
+                            <input type="text" name="madrina" id="" placeholder="" class="textPeque"> 
+                            <a href=""><img src="../img/mas.png" alt="" class="estiloImagenPequenoMas"></a>
+                            </br></br>
+                            <label for="Padrino">Testigo Exp 1</label>
+                            <input type="text" name="testigoExpediente1" id="" placeholder="" class="textPeque">
+                            <a href=""><img src="../img/mas.png" alt="" class="estiloImagenPequenoMas"></a>
+                            </br></br>
+                            <label for="Madrina">Testigo Exp 2</label>
+                            <input type="text" name="testigoExpediente2" id="" placeholder="" class="textPeque"> 
+                            <a href=""><img src="../img/mas.png" alt="" class="estiloImagenPequenoMas"></a>
+                            </br></br>
+                            <label for="Padrino">Testigo Pres 1</label>
+                            <input type="text" name="testigoPresenciales1" id="" placeholder="" class="textPeque">
+                            <a href=""><img src="../img/mas.png" alt="" class="estiloImagenPequenoMas"></a>
+                            </br></br>
+                            <label for="Madrina">Testigo Pres 2</label>
+                            <input type="text" name="testigoPresenciales2" id="" placeholder="" class="textPeque"> 
+                            <a href=""><img src="../img/mas.png" alt="" class="estiloImagenPequenoMas"></a>
+                            </br></br>
+                            <label for="Parroco">Parroco</label>
+                            <input type="text" name="parroco" id="" placeholder="" class="textPeque">
+                            </br></br> 
+                            <label for="FechaBautizo">Fecha de Matrimonio</label>
+                            <input type="text" name="fechabautizo" id="" placeholder="dd/mm/aaaa" class="textPeque"> 
+                            </br></br>                           
+                            <label for="Observacion">Observacion</label>
+                            <input type="text" name="observacion" id="" placeholder="" class="textExtra">
+                      </form>                     
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Informacion Libro
+                    </button>
+                  </h2>
+                  <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <form action="" class="form2">
+                            <label for="Libro">Libro</label>
+                            <input type="text" name="nombre" id="" placeholder="" class="textPeque">
+                            </br></br>
+                            <label for="NroRegistro">Nro de Registro</label>
+                            <input type="text" name="nroregistro" id="" placeholder="" class="textPeque" > 
+                            </br></br>
+                            <label for="NroPagina">Nro de Pagina</label>
+                            <input  type="number" min="1" name="nropagina" id="" placeholder="" class="textPeque">
+                        </form>
+                    </div>
+                  </div>
+                </div>
+                
+               </form> 
+            </div>            
+        </div>
+          <script>
+            const btn = document.querySelector('#menu-btn');
+            const menu = document.querySelector('#sidemenu');
+            btn.addEventListener('click', e =>{
+                menu.classList.toggle('menu-expanded')
+                menu.classList.toggle('menu-collapsed')
+                document.querySelector('body').classList.toggle('body-expanded');
+
+            });
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+        $(document).ready(function(){
+            //jquery for toggle sub menus
+            $('.sub-btn').click(function(){
+            $(this).next('.sub-menu').slideToggle();
+            $(this).find('.dropdown').toggleClass('rotate');
+            });
+        });
+        </script>
+     
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>

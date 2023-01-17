@@ -1,0 +1,127 @@
+
+* {
+    margin: auto;
+  }
+
+h1 {
+    padding: 0.5em;
+    }
+
+/*div principal del calendario*/
+#calendario { 
+    max-width: 100%;
+    background-color:#fffafa; 
+    text-align: center; 
+}
+/*tabla del calendario*/
+#diasc { 
+    width: 100%;
+    border: 0 solid #b4071c; 
+    border-collapse: separate; 
+    border-spacing: 1px;
+    padding: 10px;
+    background-color: #fff;
+    
+}
+
+#diasc th,#diasc td { 
+    font: normal 14pt arial; 
+    width: 70px; 
+    height: 50px; 
+    border: 1px solid rgb(255, 255, 255);
+
+}
+
+#diasc th { 
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #b4071c;
+}
+
+
+#diasc td {    
+    color: #492736; 
+    background-color: #fff;
+}
+
+
+#diasc th:hover, #diasc td:hover{
+    text-decoration: none; 
+    color: #db7b0b;   
+    text-decoration: none;
+}
+
+/*línea de la fecha actual*/
+#fechaactual { 
+    font: bold 12pt arial; 
+    padding: 0.4em;
+    color: #db0b0b;
+    text-align: right;
+}
+
+#fechaactual i { 
+    cursor: pointer ; 
+}
+
+#fechaactual i:hover { 
+    color: #db0b0b; 
+    text-decoration: underline; 
+}
+
+/*formulario de busqueda de fechas*/
+#buscafecha { 
+    background-color: #db7b0b; 
+    color: #ffffff;
+    padding: 10px; 
+    text-align: right;
+}
+
+#buscafecha select, #buscafecha input  { 
+    background-color: #ffffff;
+    color: #000000;
+    font: bold 10pt arial;  
+}
+
+#buscafecha [type=text]  { 
+    text-align: center; 
+}
+
+#buscafecha  [type=button] { 
+    cursor: pointer; 
+}
+
+
+/*cabecera del calendario*/ 
+#anterior { 
+    float: left; 
+    width: 100px;
+    font: bold 12pt arial;
+    cursor: pointer ;
+    color: #db0b0b;
+    padding: 20px;
+}
+
+#posterior { 
+    float: right; 
+    width: 100px; 
+    font: bold 12pt arial; 
+    cursor: pointer ;
+    color: #db0b0b;
+    padding: 20px;
+}
+
+#anterior:hover {
+    color: #db7b0b;   
+    text-decoration: none;
+}
+
+#posterior:hover {
+    color: #db7b0b;   
+    text-decoration: none;
+}
+
+#titulos {
+    font: normal 20pt "arial black"; 
+    color: #db0b0b;
+    padding: 15px;
+}
