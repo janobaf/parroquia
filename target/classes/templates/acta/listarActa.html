@@ -73,8 +73,11 @@
                     </table>
                   </div>
             </div>
-            
-            
+            <div id="button">
+				<button onclick="prueba();">CONFE</button>
+            <div id="reporte">
+				</div>
+				
         </div>
 
         <script>
@@ -97,6 +100,67 @@
             $(this).find('.dropdown').toggleClass('rotate');
             });
         });
+        function isErrorNotFound(codigoResponse){
+	return (codigoResponse==404);
+}
+        async function obtenerDatosGet(url,callback){
+			 var myHeaders = new Headers();
+			  var myInit = { method: 'GET',
+			                 headers: myHeaders,
+			                 mode: 'cors',
+			                 cache: 'default' };
+			  try {
+			  var myRequest = new Request(url, myInit);
+				let response = await fetch(myRequest);
+				return verificarStatus(response,callback);
+			  }
+				catch (e) {
+					console.log("ERROR : " + e.message);
+				}finally{
+					$('#loader').hide();
+				}
+			}
+		function evaluarAlertaError(codigoResponse,mensaje){
+	if(isErrorNotFound(codigoResponse)){
+		console.log('URL no encontrada');
+	}else{
+		console.log('URL no encontrada');
+	}
+}
+		async function verificarStatus(response,callback){
+			
+			 let jsonResponse = await response.json();
+			 
+			if (!response.ok) {
+				evaluarAlertaError(response.status,jsonResponse.message);
+			    }else{
+			    	if(!objectIsNull(callback)){
+			    		callback(jsonResponse)
+			    	}else{
+			    		return jsonResponse;
+			    	}
+			    }
+		}	
+		async function prueba(){
+			let url =("prueba");
+			debugger;
+			let pdfBase = await obtenerDatosGet(url,null);
+				agregarIframePdf("reporte",pdfBase);
+		}
+		function agregarIframePdf(div,pdfBaseObject){
+			document.querySelector("#"+div).innerHTML="";
+			document.querySelector("#"+div).style.height ="40px";
+				document.querySelector("#"+div).style.height ="400px";
+		
+				document.querySelector("#"+div).innerHTML=`<iframe src="data:application/pdf;base64,${pdfBaseObject.pdfBase}" height="100%" width="100%"></iframe>`;
+			
+		}
+		function objectIsNull(value){
+				return (value== undefined || value ==null);
+			}		
+				
+			
+
         </script>
     </body>
 </html>
